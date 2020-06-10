@@ -165,8 +165,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 160px;
-    cursor: pointer;
+    width: 160px
 }
 
 .siteList .addButton .link {
@@ -183,4 +182,4 @@ body {
     margin-bottom: 4px;
 }
 
-/*# sourceMappingURL=/style.e308ff8e.css.map */
+/*# sourceMappingURL=style.e1770791.css.map */

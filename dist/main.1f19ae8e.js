@@ -146,6 +146,13 @@ var render = function render() {
       hashMap.splice(index, 1);
       render();
     });
+  }); // for (let i = 0; i < hashMap.length; i++) {
+  //     hue = i * 30;
+  //     $("div.site").css('background-color', `hsl(${hue},65%,75%)`);  //hsl颜色变化
+  // }
+
+  $("div.site").each(function (index, element) {
+    $(element).css('background-color', "hsl(".concat(index * 30, ",65%,75%)"));
   });
 };
 
@@ -154,7 +161,11 @@ $('.addButton').on('click', function () {
   var url = window.prompt("添加网址：");
 
   if (url.indexOf("http") !== 0) {
-    url = 'https://www.' + url;
+    if (url.indexOf("www.") === -1) {
+      url = 'https://www.' + url;
+    } else {
+      url = 'https://' + url;
+    }
   }
 
   hashMap.push({
@@ -167,14 +178,26 @@ $('.addButton').on('click', function () {
 window.onbeforeunload = function () {
   var string = JSON.stringify(hashMap);
   localStorage.setItem('x', string);
-};
+}; // input框获取焦点
 
+
+var focusStatus = false;
+$('input').focus(function () {
+  focusStatus = true;
+}); // input框失去焦点
+
+$('input').blur(function () {
+  focusStatus = false;
+});
 $(document).on('keypress', function (e) {
-  var key = e.key;
+  //input框获取焦点关闭键盘功能
+  if (!focusStatus) {
+    var key = e.key;
 
-  for (var i = 0; i < hashMap.length; i++) {
-    if (hashMap[i].logo.toLowerCase() === key) {
-      window.open(hashMap[i].url, "_blank");
+    for (var i = 0; i < hashMap.length; i++) {
+      if (hashMap[i].logo.toLowerCase() === key) {
+        window.open(hashMap[i].url, "_blank");
+      }
     }
   }
 });
@@ -206,7 +229,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55947" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61553" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

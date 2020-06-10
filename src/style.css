@@ -165,7 +165,8 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 160px
+    width: 160px;
+    cursor: pointer;
 }
 
 .siteList .addButton .link {
